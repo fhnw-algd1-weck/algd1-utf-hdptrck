@@ -8,7 +8,8 @@ package ch.fhnw.algd1.converters.utf8;
  */
 public class UTF8Converter {
 	public static byte[] codePointToUTF(int x) {
-		if (x < 0 || x > 0b1111_1111_1111_1111_1111)
+		// kann auch weggelassen werden
+		if (x < 0 || x > 0b1_1111_1111_1111_1111_1111)
 			return null;
 
 		// 7 Bit -> 1 Byte, 11 Bit -> 2 Byte, 16 Bit -> 3 Byte, 21 Bit -> 4 Byte
@@ -51,7 +52,7 @@ public class UTF8Converter {
 			return ((bytes[0] & 0b0000_0111) << 18) +
 					((bytes[1] & 0b0011_1111) << 12) +
 					((bytes[2] & 0b0011_1111) << 6) +
-					(bytes[2] & 0b0011_1111);
+					(bytes[3] & 0b0011_1111);
 	}
 
 	private static boolean isValidUTF8(byte[] bytes) {
